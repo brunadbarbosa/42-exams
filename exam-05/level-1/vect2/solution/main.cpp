@@ -1,4 +1,4 @@
-#include "Vect2.hpp"
+#include "vect2.hpp"
 #include <iostream>
 #include <iomanip>
 
