@@ -6,6 +6,8 @@ vect2::vect2(int x, int y) : x(x), y(y) {}
 
 vect2::vect2(const vect2& other) : x(other.x), y(other.y) {}
 
+vect2::~vect2() {}
+
 vect2& vect2::operator=(const vect2& other) {
 	if (this != &other) {
 		x = other.x;
@@ -102,4 +104,5 @@ bool vect2::operator!=(const vect2& v) const {
 
 std::ostream& operator<<(std::ostream& os, const vect2& v) {
 	os << "{" << v[0] << ", " << v[1] << "}";
+	return os;
 }

@@ -35,4 +35,4 @@ class vect2 {
 		bool operator!=(const vect2& v) const;
 
 		friend std::ostream& operator<<(std::ostream& os, const vect2& v);
-}
+};
