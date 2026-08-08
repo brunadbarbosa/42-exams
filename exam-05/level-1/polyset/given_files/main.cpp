@@ -1,4 +1,7 @@
 #include "searchable_bag.hpp"
+#include "training/third/searchable_tree_bag.hpp"
+#include "training/third/searchable_array_bag.hpp"
+#include "training/third/set.hpp"
 
 #include <iostream>
 
