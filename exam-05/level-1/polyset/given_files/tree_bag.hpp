@@ -28,5 +28,5 @@ class tree_bag : virtual public bag {
 	private:
 	static void destroy_tree(node *);
 	static void print_node(node *);
-	static void *copy_node(node *);
+	static node *copy_node(node *);
 };

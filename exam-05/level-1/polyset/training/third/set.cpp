@@ -7,8 +7,6 @@ set::set(const set& other) : _bag(other._bag) {}
 set::~set() {}
 
 set& set::operator=(const set& other) {
-	if (this != &other)
-		*this=other;
 	return *this;
 }
 
