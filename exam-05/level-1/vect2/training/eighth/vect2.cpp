@@ -8,10 +8,10 @@ vect2::vect2(const vect2& v) : x(v.x), y(v.y) {}
 
 vect2::~vect2() {}
 
-vect2& vect2::operator=(const vect2& v) {
-	if (this != &v) {
-		x = v.x;
-		y = v.y;
+vect2& vect2::operator=(const vect2& other) {
+	if (this != &other) {
+		x = other.x;
+		y = other.y;
 	}
 	return *this;
 }
@@ -25,9 +25,9 @@ int& vect2::operator[](int i) {
 
 int vect2::operator[](int i) const {
 	if (i == 0)
-		return (x);
+		return x;
 	else
-		return (y);
+		return y;
 }
 
 vect2& vect2::operator++() {
@@ -65,14 +65,14 @@ vect2& vect2::operator+=(const vect2& v) {
 vect2& vect2::operator-=(const vect2& v) {
 	x -= v.x;
 	y -= v.y;
-	return *this; 
+	return *this;
 }
 
 vect2& vect2::operator*=(int s) {
 	x *= s;
 	y *= s;
 	return *this;
-} 
+}
 
 vect2 vect2::operator+(const vect2& v) const {
 	return vect2(x + v.x, y + v.y);
@@ -84,17 +84,17 @@ vect2 vect2::operator-(const vect2& v) const {
 
 vect2 vect2::operator*(int s) const {
 	return vect2(x * s, y * s);
-}
+} 
 
 vect2 operator*(int s, const vect2& v) {
-	return vect2(v.x * s, v.y * s);
+	return vect2(s * v.x, s * v.y);
 }
 
 vect2 vect2::operator-() const {
 	return vect2(-x, -y);
 }
 
-bool vect2::operator==(const vect2& v) const {
+bool vect2::operator==(const vect2& v) const{
 	return (x == v.x && y == v.y);
 }
 

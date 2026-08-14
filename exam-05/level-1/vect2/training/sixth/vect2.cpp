@@ -4,14 +4,14 @@ vect2::vect2() : x(0), y(0) {}
 
 vect2::vect2(int x, int y) : x(x), y(y) {}
 
-vect2::vect2(const vect2& v) : x(v.x), y(v.y) {}
+vect2::vect2(const vect2& other) : x(other.x), y(other.y) {}
 
 vect2::~vect2() {}
 
-vect2& vect2::operator=(const vect2& v) {
-	if (this != &v) {
-		x = v.x;
-		y = v.y;
+vect2& vect2::operator=(const vect2& other) {
+	if (this != &other) {
+		x = other.x;
+		y = other.y;
 	}
 	return *this;
 }
@@ -25,9 +25,9 @@ int& vect2::operator[](int i) {
 
 int vect2::operator[](int i) const {
 	if (i == 0)
-		return (x);
+		return x;
 	else
-		return (y);
+		return y;
 }
 
 vect2& vect2::operator++() {
@@ -37,7 +37,7 @@ vect2& vect2::operator++() {
 }
 
 vect2 vect2::operator++(int) {
-	vect2 tmp(*this);
+	vect2 tmp = *this;
 	x++;
 	y++;
 	return tmp;
@@ -50,7 +50,7 @@ vect2& vect2::operator--() {
 }
 
 vect2 vect2::operator--(int) {
-	vect2 tmp(*this);
+	vect2 tmp = *this;
 	x--;
 	y--;
 	return tmp;
@@ -58,23 +58,23 @@ vect2 vect2::operator--(int) {
 
 vect2& vect2::operator+=(const vect2& v) {
 	x += v.x;
-	y += v.y;
+	y = v.y;
 	return *this;
 }
 
 vect2& vect2::operator-=(const vect2& v) {
 	x -= v.x;
-	y -= v.y;
-	return *this; 
+	y = v.y;
+	return *this;
 }
 
 vect2& vect2::operator*=(int s) {
 	x *= s;
 	y *= s;
 	return *this;
-} 
+}
 
-vect2 vect2::operator+(const vect2& v) const {
+vect2 vect2::operator+(const vect2& v) const{
 	return vect2(x + v.x, y + v.y);
 }
 
@@ -82,27 +82,23 @@ vect2 vect2::operator-(const vect2& v) const {
 	return vect2(x - v.x, y - v.y);
 }
 
-vect2 vect2::operator*(int s) const {
+vect2 vect2::operator*(int s) const{
 	return vect2(x * s, y * s);
 }
 
 vect2 operator*(int s, const vect2& v) {
-	return vect2(v.x * s, v.y * s);
+	return vect2(s * v.x, s * v.y);
 }
 
-vect2 vect2::operator-() const {
-	return vect2(-x, -y);
+bool vect2::operator==(const vect2& v) const{
+	return (x == v.x, y == v.y);
 }
 
-bool vect2::operator==(const vect2& v) const {
-	return (x == v.x && y == v.y);
+bool vect2::operator!=(const vect2& v) const{
+	return !(x == v.x, y == v.y);
 }
 
-bool vect2::operator!=(const vect2& v) const {
-	return !(x == v.x && y == v.y);
-}
-
-std::ostream& operator<<(std::ostream& os, const vect2& v) {
+std::ostream& operator<<(std::ostream os, const vect2& v) {
 	os << "{" << v[0] << ", " << v[1] << "}";
 	return os;
 }
