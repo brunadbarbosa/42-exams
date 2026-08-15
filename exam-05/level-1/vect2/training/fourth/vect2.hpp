@@ -1,5 +1,4 @@
 #pragma once
-#pragma once
 
 #include <iostream>
 
@@ -17,10 +16,10 @@ class vect2 {
 		int& operator[](int i);
 		int operator[](int i) const;
 
-		int& operator++();
-		int operator++(int);
-		int& operator--();
-		int operator--(int);
+		vect2& operator++();
+		vect2 operator++(int);
+		vect2& operator--();
+		vect2 operator--(int);
 
 		vect2& operator+=(const vect2& v);
 		vect2& operator-=(const vect2& v);

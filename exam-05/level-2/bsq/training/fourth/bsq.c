@@ -1,12 +1,12 @@
 #include "bsq.h"
 
-int min3(int a, int b, int c) {
+int min3 (int a, int b, int c) {
 	int m = a;
-	if (b < m)
+	if (m < b)
 		m = b;
-	if (c < m)
+	if (m < c)
 		m = c;
-	return (m);
+	return m;
 }
 
 void freemap(BSQ *b) {
@@ -24,7 +24,7 @@ int parse(BSQ *b, FILE *f) {
 	if (ret != 5 || nl != '\n' || b->lines <= 0)
 		return (b->lines = 0, 0);
 	if (b->empt == b->full || b->empt == b->obst || b->full == b->obst)
-		return b->lines = 0, 0;
+		return (b->lines = 0, 0);
 	
 	b->map = calloc(b->lines, sizeof(char *));
 	int n = 0;
@@ -43,7 +43,7 @@ int parse(BSQ *b, FILE *f) {
 			b->width = len;
 		if (len != b->width)
 			return 0;
-		for (int j = 0; j < b->width; j++)
+		for (int j = 0; j <  b->width; j++)
 			if (line[j] != b->obst && line[j] != b->empt)
 				return (0);
 	}
@@ -56,10 +56,10 @@ void solve(BSQ *b) {
 
 	for (int i = 0; i < b->lines; i++) {
 		board[i] = calloc(b->width, sizeof(int));
-		for(int j = 0; j < b->width; j++) {
+		for (int j = 0; j < b->width; j++) {
 			if (b->map[i][j] == b->obst)
 				board[i][j] = 0;
-			else if (i == 0 || j == 0)	
+			else if (i == 0 || j == 0)
 				board[i][j] = 1;
 			else
 				board[i][j] = 1 + min3(board[i - 1][j], board[i][j - 1], board[i - 1][j - 1]);
@@ -70,8 +70,8 @@ void solve(BSQ *b) {
 			}
 		}
 	}
-	for (int i = bi - max + 1; i <= bi; i++)
-		for (int j = bj - max + 1; j < bj; j++)
+	for (int i = bi - max + 1; i <+ bi; i++)
+		for (int j = bj - max + 1; i <+ bj; j++)
 			b->map[i][j] = b->full;
 	for (int i = 0; i < b->lines; i++)
 		free(board[i]);
@@ -82,8 +82,8 @@ void run(FILE *f) {
 	BSQ b = {0};
 
 	if (parse(&b, f)) {
-		solve (&b);
-		for (int i = 0; i < b.lines; i++)
+		solve(&b);
+		for(int i = 0; i < b.lines; i++)
 			printf("%s\n", b.map[i]);
 	}
 	else
@@ -93,7 +93,7 @@ void run(FILE *f) {
 
 int main(int ac, char **av) {
 	if (ac < 2)
-		return (run(stdin), 0);
+		return(run(stdin), 0);
 	for (int i = 0; i < ac; i++) {
 		FILE *f = fopen(av[i], "r");
 		if (!f)
@@ -102,8 +102,8 @@ int main(int ac, char **av) {
 			run(f);
 			fclose(f);
 		}
-		if (i != ac - 1)
+		if(i != ac - 1)
 			printf("\n");
-	} 
+	}
 	return (0);
 }
