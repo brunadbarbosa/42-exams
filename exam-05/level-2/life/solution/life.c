@@ -40,7 +40,7 @@ int main(int ac, char **av) {
 
 				for (int yy = -1; yy <= 1; yy++)
 					for (int xx = -1; xx <= 1; xx++)
-						if ((xx || yy) && x + xx > 0 && y + yy > 0 && x + xx < width - 1 && y + yy < height - 1)
+						if ((xx || yy) && x + xx >= 0 && y + yy >= 0 && x + xx < width - 1 && y + yy < height - 1)
 							n += board[y+yy][x+xx];
 					if (board[y][x] && (n == 2 || n== 3))
 						new[y][x] = 1;
@@ -56,7 +56,7 @@ int main(int ac, char **av) {
 	}
 	for (int i = 0; i < height; i++) {
 		for (int j = 0; j < width; j++)
-			putchar(board[i][j] ? '0' : ' ');
+			putchar(board[i][j] ? 'O' : ' ');
 		putchar('\n');
 	}
 }
