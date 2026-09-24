@@ -13,16 +13,16 @@ int main (int ac, char **av) {
 	for (int i = 0; i < height; i++)
 		for (int j = 0; j < width; j++)
 			board[i][j] = 0;
-
+	
 	int x = 0, y = 0, pen = 0;
 	char c;
 
 	while(read(0, &c, 1)) {
 		if (c == 'w' && y > 0)
 			y--;
-		else if (c == 's' && y < height - 1)
+		else if(c == 's' && y < height - 1)
 			y++;
-		else if (c == 'a' && x > 0)
+		else if(c == 'a' && x > 0)
 			x--;
 		else if (c == 'd' && x < width - 1)
 			x++;
@@ -31,17 +31,17 @@ int main (int ac, char **av) {
 		if (pen)
 			board[y][x] = 1;
 	}
-	
+
 	int n = 0;
 	int new[height][width];
 	for (int it = 0; it < iter; it++) {
-		for (int y = 0; y < height; y++) {
+		for(int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				n = 0;
-				for (int yy = -1; yy <= 1; yy++) 
+				for (int yy = -1; yy <= 1 ; yy++)
 					for (int xx = -1; xx <= 1; xx++)
-						if ((xx || yy) && y + yy >= 0 && y + yy < height && x + xx >= 0 && x + xx < width)
-							n += board[y + yy][x + xx];
+						if ((xx || yy) && x + xx >= 0 && y + yy >= 0 && x + xx < width && y + yy < height)
+							n+= board[y + yy][x + xx];
 				if (board[y][x] && (n == 2 || n == 3))
 					new[y][x] = 1;
 				else if(!board[y][x] && (n == 3))
@@ -50,13 +50,13 @@ int main (int ac, char **av) {
 					new[y][x] = 0;
 			}
 		}
-		for(int i = 0; i < height; i++)
+		for (int i = 0; i < height; i++)
 			for (int j = 0; j < width; j++)
 				board[i][j] = new[i][j];
 	}
-	for(int i = 0; i < height; i++) {
+	for (int i = 0; i < height; i++) {
 		for (int j = 0; j < width; j++)
 			putchar(board[i][j] ? 'O' : ' ');
-		putchar('\n');	
+		putchar('\n');
 	}
 }

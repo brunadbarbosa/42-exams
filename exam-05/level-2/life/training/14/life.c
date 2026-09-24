@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main (int ac, char **av) {
+int main(int ac, char **av) {
 	if (ac != 4)
 		return 1;
 	int width = atoi(av[1]);
@@ -13,11 +13,11 @@ int main (int ac, char **av) {
 	for (int i = 0; i < height; i++)
 		for (int j = 0; j < width; j++)
 			board[i][j] = 0;
-
-	int x = 0, y = 0, pen = 0;
+	
+	int y = 0, x = 0, pen = 0;
 	char c;
 
-	while(read(0, &c, 1)) {
+	while (read(0, &c, 1)) {
 		if (c == 'w' && y > 0)
 			y--;
 		else if (c == 's' && y < height - 1)
@@ -31,32 +31,33 @@ int main (int ac, char **av) {
 		if (pen)
 			board[y][x] = 1;
 	}
-	
+
 	int n = 0;
 	int new[height][width];
 	for (int it = 0; it < iter; it++) {
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				n = 0;
-				for (int yy = -1; yy <= 1; yy++) 
+				for (int yy = -1; yy <= 1; yy++)
 					for (int xx = -1; xx <= 1; xx++)
 						if ((xx || yy) && y + yy >= 0 && y + yy < height && x + xx >= 0 && x + xx < width)
 							n += board[y + yy][x + xx];
 				if (board[y][x] && (n == 2 || n == 3))
 					new[y][x] = 1;
-				else if(!board[y][x] && (n == 3))
+				else if (!board[y][x] && n == 3)
 					new[y][x] = 1;
-				else 
+				else
 					new[y][x] = 0;
 			}
 		}
-		for(int i = 0; i < height; i++)
+		for (int i = 0; i < height; i++)
 			for (int j = 0; j < width; j++)
 				board[i][j] = new[i][j];
 	}
-	for(int i = 0; i < height; i++) {
+	for (int i = 0; i < height; i++) {
 		for (int j = 0; j < width; j++)
-			putchar(board[i][j] ? 'O' : ' ');
-		putchar('\n');	
+			putchar(board[i][j] ? 'O' : ' ');		
+		putchar('\n');
 	}
+	return 0;
 }
